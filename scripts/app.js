@@ -6,8 +6,9 @@ const icon = document.querySelector(".icon img");
 const forecast = new Forecast();
 
 const updateUI = (data) => {
-  console.log(data);
+  // console.log(data);
   const { cityDets, weather } = data;
+
   // update details template
   details.innerHTML = `
     <h5 class="my-3">${cityDets.EnglishName}</h5>
@@ -24,7 +25,7 @@ const updateUI = (data) => {
   let timeSrc = weather.IsDayTime ? "img/day.svg" : "img/night.svg";
   time.setAttribute("src", timeSrc);
 
-  // remove the d-none class if present
+  // show cards by removing d-none
   if (card.classList.contains("d-none")) {
     card.classList.remove("d-none");
   }
@@ -48,6 +49,7 @@ cityForm.addEventListener("submit", (e) => {
   localStorage.setItem("city", city);
 });
 
+// update the ui if there's data in localStorage
 if (localStorage.getItem("city")) {
   forecast
     .updateCity(localStorage.getItem("city"))
